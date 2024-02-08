@@ -20,9 +20,17 @@ amaç rest api üzerinden kullanıcı bilgilerini almak ve kaydetmek(JSON format
 
 
 class UserSerializer(serializers.Serializer):
+    # def __init__(self,id,username,email,role):
     id = serializers.IntegerField(read_only=True)
     username = serializers.CharField(max_length=100)
     email = serializers.EmailField(max_length=70)
     role = serializers.CharField(max_length=100)
+
+    def create(self):
+        pass 
+
+    def update(self):
+        pass
+
 
 

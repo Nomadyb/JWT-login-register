@@ -8,7 +8,7 @@ amaç rest api üzerinden kullanıcı bilgilerini almak ve kaydetmek(JSON format
 
 """
 #TODO: meta yapısını kullanmamalısın manuel ekle 
-#TODO: CRUD ile ilgili işlemler tam nerde olmalı 
+#TODO: veriler doğrul
 
 
 # class UserSerializer(serializers.ModelSerializer):
@@ -27,9 +27,14 @@ class UserSerializer(serializers.Serializer):
     email = serializers.EmailField(max_length=70)
     role = serializers.CharField(max_length=100)
 
+    #verilerin doğrulanmasına bağlı olarak nesnelerin döndürülmesi için hem create hem update uygulanmalıdır
     def create(self, validated_data):
         return User.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
-        pass
+        instance.username = validated_data.get('username', instance.username)
+        instance.email = validated_data.get('email', instance.email)
+        instance.role = validated_data.get('role', instance.role)
+        instance.save()
+        return instance
 

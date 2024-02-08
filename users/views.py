@@ -102,7 +102,10 @@ class RegisterView(APIView):
 
 #kullanıcı girişi token gerekiyor sanırsam
 class LoginView(ObtainAuthToken):
+
     def post(self, request, *args, **kwargs):
+        #username
         email = request.data.get('email')
         password = request.data.get('password')
+
 
